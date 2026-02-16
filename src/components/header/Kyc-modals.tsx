@@ -1,9 +1,10 @@
 import Cookies from 'js-cookie';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import KycPopup from '@/components/KYC/kyc-popup';
 import StyledModal from '@/components/Modal/Modal';
 import { KYC } from '@/helpers/constants/asset-status';
+import { KYC_STATUS } from '@/helpers/constants/user-status';
 import { useCookieListener } from '@/hooks/useCookieListener';
 import { useUserListener } from '@/hooks/useUserListener';
 import { useLazyGetUserDetailsQuery, useUpdateUserMutation } from '@/redux/apis/user.api';
@@ -29,22 +30,28 @@ export default function KycModals() {
     postalCode: '',
   });
 
-  const openKycPopupHandler = () => {
+  const openKycPopupHandler = useCallback(() => {
     try {
-      const hasUserDetails = userData?.address && userData?.phoneNumber;
+      // Use direct cookie data to avoid state lag from Header.tsx refresh
+      const user = Cookies.get('user');
+      const current_user = user ? JSON.parse(user) : userData;
 
-      if (!isTokenAdded || !userData || !userData?._id) return;
+      const hasUserDetails = current_user?.address && current_user?.phoneNumber;
+
+      if (!isTokenAdded || !current_user || !current_user?._id) return;
 
       // Check if KYC is already completed
-      if (userData?.kycVerificationStatus === 'completed') {
+      if (current_user?.kycVerificationStatus === KYC_STATUS.VERIFIED) {
         setModalOpen(false);
         setOpenKycPopup(false);
+
         return;
       }
 
       // If status is 'review', show the review modal
-      if (userData?.kycVerificationStatus === 'review') {
+      if (current_user?.kycVerificationStatus === KYC_STATUS.REVIEW) {
         setModalOpen(true);
+
         return;
       }
 
@@ -56,17 +63,12 @@ export default function KycModals() {
       }
       setOpenKycPopup(true);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error opening KYC popup:', error);
       setModalOpen(false);
       setOpenKycPopup(false);
     }
-  };
-
-  useEffect(() => {
-    if (window.location.pathname === '/') {
-      openKycPopupHandler();
-    }
-  }, [isTokenAdded, userData]);
+  }, [isTokenAdded, userData, setModalOpen, setOpenKycPopup, setInitialStep]);
 
   useEffect(() => {
     window.addEventListener('openKycPopup', openKycPopupHandler);

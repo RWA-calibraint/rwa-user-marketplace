@@ -133,6 +133,7 @@ export default function Collections() {
       }));
     }
     refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collectionsList]);
 
   const resetFilters = () => {

@@ -141,6 +141,8 @@ const EditAssetDocument = ({
         return Upload.LIST_IGNORE;
       }
     } catch (error: unknown) {
+      // eslint-disable-next-line no-console
+      console.log(error);
       try {
         const password = await getPdfPassword();
 
@@ -152,6 +154,9 @@ const EditAssetDocument = ({
           return Upload.LIST_IGNORE;
         }
       } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(e);
+
         return Upload.LIST_IGNORE;
       }
     }

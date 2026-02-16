@@ -8,7 +8,7 @@ interface NoOfTokensViewProps {
   index: number;
 }
 
-export const NoOfTokensView: React.FC<NoOfTokensViewProps> = ({ value, record, index }) => {
+export const NoOfTokensView: React.FC<NoOfTokensViewProps> = ({ value, index }) => {
   const { convertUsdToPol } = useUsdToPolConverter();
 
   return (

@@ -63,7 +63,7 @@ const RWAToken = ENV_CONFIGS.RWA_TOKEN_CONTRACT_ADDRESS as `0x${string}`;
 
 export const handleBuyWithCrypto = async (buyCryptoData: buyCryptoInterface) => {
   const {
-    assetData: { tokens, price, listingId, ContractListingId, sellerId, initialSeller },
+    assetData: { tokens, price, ContractListingId, sellerId, initialSeller },
     activeAccount,
     setIsPaymentModalOpen,
     setPaymentStatus,
@@ -140,6 +140,8 @@ export const handleBuyWithCrypto = async (buyCryptoData: buyCryptoInterface) => 
         return;
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error checking USDC balance:', error);
       showErrorToast('Failed to check USDC balance.', ERROR_MESSAGE.DEFAULT);
 
       return;
@@ -253,6 +255,8 @@ export const handleBuyWithCrypto = async (buyCryptoData: buyCryptoInterface) => 
     setIsPaymentModalOpen(true);
     if (assetRefetch) assetRefetch();
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error buying token:', error);
     setPaymentStatus(PAYMENT_STATUS.FAILURE);
     setIsPaymentModalOpen(true);
   }
@@ -355,12 +359,12 @@ export const handleListCrypto = async (listingData: cryptoListingInterface) => {
         isActive: boolean;
       };
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error getting listing:', error);
       getListing = null; // or handle the fallback logic accordingly
     }
 
     if (!getListing) {
-      console.error('Listing not found or failed to fetch.');
-
       return; // or handle fallback logic here
     }
 
@@ -456,7 +460,7 @@ export const handleContractCall = async (
 
     const balanceInEth = parseFloat(balance.displayValue);
 
-    if (balanceInEth < 0.001) {
+    if (balanceInEth < 0.01) {
       showErrorToast(ERROR_MESSAGE.INSUFFICIENT_POL_BALANCE, ERROR_MESSAGE.DEFAULT);
 
       return false;
@@ -469,6 +473,12 @@ export const handleContractCall = async (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       abi: RwaTokenAbi as any,
     });
+
+    // console.log('Checking approval for:', {
+    //   account: activeAccount.address,
+    //   operator: marketplaceAddress,
+    //   contract: RWAToken,
+    // });
 
     const isApproved = (await readContract({
       contract: rwaContract,

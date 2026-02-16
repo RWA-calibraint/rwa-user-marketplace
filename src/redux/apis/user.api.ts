@@ -90,7 +90,16 @@ export const userApi = baseApi.injectEndpoints({
     }),
 
     aadhaarVerifyOtp: builder.mutation<
-      { response: { status: string; message: string; name: string; dateOfBirth: string; gender: string; address: string } },
+      {
+        response: {
+          status: string;
+          message: string;
+          name: string;
+          dateOfBirth: string;
+          gender: string;
+          address: string;
+        };
+      },
       { referenceId: string; otp: string }
     >({
       query: (bodyData) => ({
@@ -99,10 +108,28 @@ export const userApi = baseApi.injectEndpoints({
         body: bodyData,
       }),
     }),
+    diditCreateSession: builder.mutation<
+      {
+        response_code: number;
+        response_status: string;
+        response: { url: string; sessionId: string; sessionToken: string };
+      },
+      void
+    >({
+      query: () => ({
+        url: END_POINTS.diditCreateSession,
+        method: API_METHODS.POST,
+      }),
+    }),
+
+    diditGetDecision: builder.query<unknown, { sessionId: string }>({
+      query: ({ sessionId }) => END_POINTS.diditGetDecision(sessionId),
+    }),
   }),
 });
 
 export const {
+  useGetUserDetailsQuery,
   useLazyGetUserDetailsQuery,
   useUpdateUserMutation,
   useGetUserRewardsQuery,
@@ -115,5 +142,6 @@ export const {
   useVerifyCryptoAddressMutation,
   useAadhaarGenerateOtpMutation,
   useAadhaarVerifyOtpMutation,
+  useDiditCreateSessionMutation,
+  useLazyDiditGetDecisionQuery,
 } = userApi;
-

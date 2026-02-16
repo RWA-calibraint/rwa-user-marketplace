@@ -10,13 +10,9 @@ import { Suspense, useEffect, useState } from 'react';
 import { Menu } from '@/components/menu';
 import './styles.scss';
 import EmptyState from '@/components/profile/emptyState';
-import KYC from '@/components/profile/kyc';
 import { KYC_STATUS } from '@/helpers/constants/user-status';
 import { useUserListener } from '@/hooks/useUserListener';
-import {
-  useGetUserRewardsQuery,
-  useUpdateUserMutation,
-} from '@/redux/apis/user.api';
+import { useGetUserRewardsQuery, useUpdateUserMutation } from '@/redux/apis/user.api';
 import Address from '@components/profile/address';
 import { UserDetails } from '@components/profile/interface';
 import ProfileDetails from '@components/profile/profile';
@@ -43,6 +39,7 @@ const Profile = () => {
   const kycVerification = JSON.parse(searchParams.get('verification') ? 'true' : 'false');
   const isMobile = useMediaQuery('mobile');
 
+  const [isClient, setIsClient] = useState(false);
   const userData = useUserListener(kycVerification);
   const [menu, setMenu] = useState(availableMenu(search ?? 'Account'));
   const [form] = Form.useForm();
@@ -50,11 +47,9 @@ const Profile = () => {
   const { data: rewardsList } = useGetUserRewardsQuery({});
 
   const [userDetails, setUserDetails] = useState<UserDetails>();
-  const [isClient, setIsClient] = useState(false);
   const [showAddressForm, setShowAddressForm] = useState<boolean>(false);
   const [hasAddress, setHasAddress] = useState<boolean>(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [kycStatus, setKycStatus] = useState<string | undefined>('');
 
   useEffect(() => {
     setIsClient(true);
@@ -74,16 +69,6 @@ const Profile = () => {
   }, [isClient, userData]);
 
   useEffect(() => {
-    if (userData?.kycVerificationStatus === 'completed') {
-      setKycStatus(KYC_STATUS.VERIFIED);
-    } else if (userData?.kycVerificationStatus === 'review') {
-      setKycStatus(KYC_STATUS.RESUBMIT);
-    } else {
-      setKycStatus(KYC_STATUS.PENDING);
-    }
-  }, [userData]);
-
-  useEffect(() => {
     form.setFieldsValue({
       firstName: userDetails?.firstName,
       lastName: userDetails?.lastName,
@@ -97,7 +82,6 @@ const Profile = () => {
       postalCode: userDetails?.postalCode,
     });
   }, [form, userDetails]);
-
   const handleMenu = (e: { key: string }) => {
     setMenu(availableMenu(e.key));
     router.replace(`/profile?target=${e.key}`);
@@ -195,9 +179,11 @@ const Profile = () => {
                       label: (
                         <div className="d-flex align-center justify-space-between">
                           <span>KYC</span>
-                          {kycStatus !== KYC_STATUS.VERIFIED && (
-                            <span className="f-10-12-500-warning-secondary bg-warning p-x-8 p-y-4 m-l-2">
-                              {kycStatus}
+                          {userData?.kycVerificationStatus !== KYC_STATUS.VERIFIED && (
+                            <span className="f-10-12-500-warning-secondary bg-warning text-uppercase p-x-8 p-y-4 m-l-2">
+                              {userData?.kycVerificationStatus === KYC_STATUS.RESUBMIT
+                                ? 'RESUBMIT'
+                                : userData?.kycVerificationStatus?.toUpperCase()}
                             </span>
                           )}
                         </div>
@@ -262,7 +248,7 @@ const Profile = () => {
                       }
                     />
                   )
-                ) : kycStatus === KYC_STATUS.VERIFIED ? (
+                ) : userData?.kycVerificationStatus === KYC_STATUS.VERIFIED ? (
                   <div className="d-flex flex-column align-center justify-center p-y-32">
                     <ShieldCheck size={48} color="#52c41a" />
                     <h3 className="f-17-18-600-secondary m-t-16">KYC Verified</h3>
@@ -270,9 +256,15 @@ const Profile = () => {
                   </div>
                 ) : (
                   <EmptyState
-                    title={kycStatus === KYC_STATUS.RESUBMIT ? 'KYC needs resubmission' : 'KYC is incomplete'}
+                    title={
+                      userData?.kycVerificationStatus === KYC_STATUS.RESUBMIT
+                        ? 'KYC needs resubmission'
+                        : 'KYC is incomplete'
+                    }
                     subtitle="It is necessary to complete KYC Verification before you can purchase or sell assets in RareAgora Marketplace."
-                    buttonText={kycStatus === KYC_STATUS.RESUBMIT ? 'Resubmit KYC' : 'Complete KYC'}
+                    buttonText={
+                      userData?.kycVerificationStatus === KYC_STATUS.RESUBMIT ? 'Resubmit KYC' : 'Complete KYC'
+                    }
                     onButtonClick={() => handleInitiateKyc()}
                     hasPlus={false}
                     icon={

@@ -1,14 +1,7 @@
-import Cookies from 'js-cookie';
+import { KYC_STATUS } from '../constants/user-status';
 
-export const isKycVerified = () => {
-  const user = JSON.parse(Cookies.get('user') || '{}');
+export const isKycVerified = (user: { kycVerificationStatus?: string } | null | undefined) => {
+  if (!user) return false;
 
-  if (!user || user === '') return false;
-
-  if (user?.kycVerificationStatus === 'completed') {
-    return true;
-  }
-
-  window.dispatchEvent(new Event('openKycPopup'));
-  return false;
+  return user.kycVerificationStatus === KYC_STATUS.VERIFIED;
 };

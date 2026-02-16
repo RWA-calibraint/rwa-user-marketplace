@@ -31,6 +31,7 @@ const AssetDetailsPage = ({ assetData, refetch }: AssetDetailProps) => {
       }
     }
     addAssetViews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -12,7 +12,10 @@ export const useUsdToPolConverter = () => {
         const price = data['matic-network'].usd;
 
         setPol(price);
-      } catch (error) {}
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error getting USD to POL conversion rate:', error);
+      }
     }
 
     getUSDToPOL();

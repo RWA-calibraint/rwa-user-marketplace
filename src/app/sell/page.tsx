@@ -3,9 +3,8 @@
 import { Button, Form, Steps, UploadFile } from 'antd';
 import { RcFile } from 'antd/es/upload';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Descendant } from 'slate';
-import { useActiveAccount } from 'thirdweb/react';
 
 import { isKycVerified } from '@/helpers/services/kyc-verification';
 import { useUserListener } from '@/hooks/useUserListener';
@@ -78,8 +77,6 @@ const AssetDetailsForm = () => {
     return [];
   }, [categories, isFetching]);
 
-  const activeAccount = useActiveAccount();
-
   const constructImages = useCallback(
     async (mediaUrls: string[]) => {
       try {
@@ -94,8 +91,6 @@ const AssetDetailsForm = () => {
               });
 
               if (!response.ok) {
-                console.error(`Failed to fetch media ${index}:`, response.status);
-
                 return null;
               }
 
@@ -221,7 +216,7 @@ const AssetDetailsForm = () => {
     } else {
       setFormTitle('Asset Location');
     }
-    //NOTE :-> DO NOT INCLUDE currentForm AS DEPENDENCY
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [assetDetail, constructImages, form]);
 
   useEffect(() => {
@@ -276,10 +271,6 @@ const AssetDetailsForm = () => {
   }, [form, hasFormUpdated]);
 
   useEffect(() => {
-    isKycVerified();
-  }, []);
-
-  useEffect(() => {
     if (user?.stripeAccountId && !stripeOnboardStatus) {
       const checkIsStripeOnboarded = async () => {
         const response = await getStripeLoginLink(user?.stripeAccountId);
@@ -292,6 +283,7 @@ const AssetDetailsForm = () => {
     } else {
       setIsStripeModalOpen(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const renderStepContent = () => {
@@ -334,7 +326,11 @@ const AssetDetailsForm = () => {
   const handleNext = async () => {
     const formValues = await validateForm();
 
-    if (!isKycVerified()) return;
+    if (!isKycVerified(user)) {
+      window.dispatchEvent(new Event('openKycPopup'));
+
+      return;
+    }
 
     if (!stripeOnboardStatus?.isAccountOnboarded) return setIsStripeModalOpen(true);
 
@@ -417,7 +413,11 @@ const AssetDetailsForm = () => {
   };
 
   const handleCreateAsset = async () => {
-    if (!isKycVerified()) return;
+    if (!isKycVerified(user)) {
+      window.dispatchEvent(new Event('openKycPopup'));
+
+      return;
+    }
 
     // if (!activeAccount) {
     //   showErrorToast(ERROR_MESSAGE.WALLET_NOT_CONNECTED, 'Wallet not connected.');
