@@ -1,0 +1,101 @@
+.custom-close {
+  position: absolute;
+  top: 18px !important;
+  right: 20px !important;
+  color: var(--text-secondary) !important;
+}
+
+.form-input {
+  height: 44px !important;
+  border-radius: 6px !important;
+}
+
+.form-input:focus {
+  border: 1px solid #1677ff !important;
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1) !important;
+}
+
+.custom-input .ant-input-outlined:focus-within {
+  border: 1px solid #1677ff !important;
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1) !important;
+}
+
+.custom-input.ant-picker:focus-within {
+  border: 1px solid #1677ff !important;
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1) !important;
+}
+
+.custom-input.ant-input-affix-wrapper:focus-within {
+  border: 1px solid #1677ff !important;
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1) !important;
+  background-color: #fff !important;
+}
+
+.change-profile-settings {
+  width: 180px;
+  height: 44px !important;
+}
+
+.cancel-button {
+  height: 44px !important;
+}
+
+.react-tel-input {
+  width: 100%;
+  position: relative;
+}
+
+.react-tel-input .form-control {
+  width: 100% !important;
+  height: 44px !important;
+  padding-left: 64px !important;
+  font-size: 14px;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.react-tel-input .flag-dropdown {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: transparent !important;
+  border: none !important;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--stroke-primary);
+}
+
+.react-tel-input .selected-flag {
+  width: 56px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+}
+
+.react-tel-input .selected-flag .flag {
+  transform: scale(1.6);
+  transform-origin: center;
+}
+
+.react-tel-input .country-list {
+  position: absolute !important;
+  top: 100% !important;
+  margin-top: 4px;
+  left: 0 !important;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.phone-input-container:hover {
+  border-color: #4096ff;
+}
+
+.ant-form-item-has-error .ant-input-affix-wrapper {
+  border-color: red !important;
+  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
+}

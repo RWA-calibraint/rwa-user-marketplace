@@ -1,0 +1,16 @@
+export const ENV_CONFIGS = {
+  THIRD_WEB_CLIENT_ID: process.env.NEXT_PUBLIC_THIRD_WEB_CLIENT_ID || '2b35873eecc684d66c99d94f464b94f5',
+  API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dev-api.rareagora.com/',
+  GOOGLE_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || 'AIzaSyBIihQLtkun1rK8byQJimIyPa6R1-XUZnM',
+  MIXPANEL_TOKEN: process.env.NEXT_PUBLIC_MIXPANEL_TOKEN || '5349aec80c28b5a320349547d9c67180',
+  USDT_ADDRESS: process.env.NEXT_PUBLIC_USDT_ADDRESS || '0x7643F640B85610C830CF68030f5621025206ab7C',
+  RWA_TOKEN_CONTRACT_ADDRESS:
+    process.env.NEXT_PUBLIC_RWA_TOKEN_CONTRACT_ADDRESS || '0x37b84FF80B969b67cB28E92921B40155c170cD41',
+  MARKETPLACE_PROXY: process.env.NEXT_PUBLIC_MARKETPLACE_PROXY || '0x66E32f6Fc8a94cE3284765d34c93d27676534B52',
+  MOONPAY_BUY_URL:
+    process.env.NEXT_PUBLIC_MOONPAY_URL ||
+    'https://buy-sandbox.moonpay.com/?apiKey=pk_test_zEXTJ8zzhd1WoAI0TEMHaBdLWPcKhRk',
+  MOONPAY_SELL_URL:
+    process.env.MOONPAY_SELL_URL || 'https://sell-sandbox.moonpay.com/?apiKey=pk_test_zEXTJ8zzhd1WoAI0TEMHaBdLWPcKhRk',
+  POLYGON_URL: 'https://amoy.polygonscan.com/address',
+};

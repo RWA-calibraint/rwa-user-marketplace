@@ -1,0 +1,81 @@
+.ant-table-wrapper {
+  .ant-table {
+    cursor: pointer !important;
+
+    .ant-table-thead > tr > th {
+      font-size: 14px;
+      line-height: 16px;
+      font-weight: 500;
+      color: var(--neutral-color-500);
+
+      .ant-checkbox-indeterminate .ant-checkbox-inner:after {
+        background-color: unset !important;
+      }
+
+      .ant-checkbox-checked .ant-checkbox-inner {
+        background-color: var(--check-box) !important;
+        border-color: var(--check-box) !important;
+      }
+    }
+
+    .ant-table-body {
+      overflow-x: auto !important;
+      overflow-y: auto !important;
+      scrollbar-width: none;
+    }
+
+    .ant-table-body::-webkit-scrollbar {
+      display: none !important;
+    }
+
+    .ant-table-tbody {
+      .ant-table-row.ant-table-row-selected > .ant-table-cell {
+        background-color: var(--background-secondary);
+      }
+
+      tr {
+        .ant-table-selection-column {
+          .ant-checkbox-checked .ant-checkbox-inner {
+            background-color: var(--check-box) !important;
+            border-color: var(--check-box) !important;
+          }
+        }
+
+        .ant-table-cell-row-hover {
+          background-color: var(--background-secondary) !important;
+        }
+      }
+    }
+
+    .ant-table-container {
+      border: 1px solid var(--neutral-color-200);
+      border-radius: 6px !important;
+      overflow: hidden !important;
+
+      .ant-checkbox .ant-checkbox-inner {
+        width: 20px !important;
+        height: 20px !important;
+      }
+    }
+  }
+}
+
+.custom-table {
+  .ant-table-wrapper {
+    .ant-table {
+      .ant-table-thead > tr > th {
+        border-inline-end: 0 !important;
+
+        .ant-table-cell {
+          border-inline-end: 0 !important;
+        }
+      }
+    }
+
+    .ant-table-container {
+      border: 1px solid var(--neutral-color-200);
+      border-radius: 8px !important;
+      overflow: hidden !important;
+    }
+  }
+}

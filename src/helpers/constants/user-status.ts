@@ -1,0 +1,5 @@
+export enum KYC_STATUS {
+  PENDING = 'PENDING',
+  VERIFIED = 'VERIFIED',
+  RESUBMIT = 'RESUBMIT',
+}

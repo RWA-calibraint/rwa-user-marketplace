@@ -1,0 +1,28 @@
+body .ant-form .ant-form-item .custom-textarea.ant-input {
+  height: 112px !important;
+  resize: none;
+}
+
+.ant-image-preview-img-wrapper {
+  img {
+    width: 600px;
+    max-height: 100% !important;
+  }
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spinner 1s linear infinite;
+}
+
+.no-padding-upload .ant-upload-drag .ant-upload {
+  padding: 2px !important;
+}

@@ -1,0 +1,52 @@
+.ant-tabs-nav-list {
+  width: 100% !important;
+  display: flex !important;
+  overflow: auto;
+}
+
+.custom-nav-list .ant-tabs-nav-list {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between;
+}
+
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #175675 !important;
+  text-shadow: none !important;
+}
+
+.ant-tabs {
+  .ant-tabs-nav {
+    position: sticky !important;
+    top: 84px;
+    background-color: var(--background-white) !important;
+    margin: 0 !important;
+  }
+
+  .ant-tabs-tab {
+    color: var(--text-tertiary) !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+  }
+}
+
+.ant-tabs .ant-tabs-ink-bar {
+  background: #175675;
+  border-radius: 5px;
+}
+
+.ant-col {
+  width: 100% !important;
+}
+
+.custom-tab .ant-tabs-nav {
+  position: static !important;
+}
+
+.custom-tab .ant-tabs-nav::before {
+  display: none;
+}
+
+.ant-badge .ant-scroll-number {
+  display: flex !important;
+}

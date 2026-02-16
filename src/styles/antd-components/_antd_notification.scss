@@ -1,0 +1,76 @@
+.ant-notification-notice-wrapper {
+  .ant-notification-notice {
+    height: 44px !important;
+    border-radius: 4px !important;
+    padding: 12px !important;
+
+    &.ant-notification-notice-error {
+      background-color: #fff1f1 !important;
+      color: #3f3f46 !important;
+
+      .ant-notification-notice-icon {
+        color: var(--red-color-600) !important;
+      }
+    }
+
+    &.ant-notification-notice-success {
+      background-color: var(--green-color-50) !important;
+      color: #3f3f46 !important;
+
+      .ant-notification-notice-icon {
+        color: #17a24f !important;
+      }
+    }
+
+    &.ant-notification-notice-closable {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+    }
+
+    .ant-notification-notice-content {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+
+      .ant-notification-notice-with-icon {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+
+        .ant-notification-notice-message {
+          color: var(--neutral-color-700) !important;
+          font-size: 14px !important;
+          font-weight: 400 !important;
+        }
+      }
+    }
+
+    .ant-notification-notice-close {
+      position: relative !important;
+      display: flex !important;
+      top: 0px !important;
+      height: 20px !important;
+      width: 20px !important;
+      inset-inline-end: 0px !important;
+    }
+  }
+
+  .ant-notification-notice-icon {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 12px !important;
+    inset-inline-end: 0px !important;
+    height: 20px !important;
+    width: 20px !important;
+  }
+
+  .ant-notification-notice-message {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin: 0px !important;
+  }
+}

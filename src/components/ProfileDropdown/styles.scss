@@ -1,0 +1,42 @@
+.ant-popover-inner {
+  padding: 0 !important;
+}
+
+.custom-divider {
+  position: relative !important;
+  top: 0 !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.custom-divider-one {
+  margin: 0 !important;
+}
+
+.mobile-view-profile-drawer .ant-drawer-body {
+  padding: 0px !important;
+}
+
+.mobile-view-profile-drawer .profile-drawer-content .profile-content-container {
+  width: 100% !important;
+  border: none !important;
+  margin: 0px !important;
+}
+
+.mobile-view-profile-drawer .kyc-pending-highlight {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--yellow-color-500);
+}
+
+.mobile-view-profile-drawer .kyc-pending-highlight .ant-avatar-string {
+  transform: scale(0.23) !important;
+}
+
+.mobile-view-profile-drawer .kyc-pending-alert-icon {
+  bottom: 0px;
+  right: -4px;
+  background-color: var(--yellow-color-500);
+  color: white;
+  border-radius: 50%;
+}

@@ -1,0 +1,22 @@
+.date-picker-input .ant-picker {
+  width: 100% !important;
+}
+
+.kyc-progress-container .ant-progress-bg {
+  background-color: var(--brand-color-600) !important;
+}
+
+.kyc-phone-input input {
+  width: 100% !important;
+  height: 45px !important;
+}
+
+.kyc-date-input .ant-picker-input > input::placeholder {
+  text-align: start !important;
+}
+
+.kyc-input-field {
+  .ant-col {
+    width: unset !important;
+  }
+}

@@ -1,0 +1,15 @@
+.custom-menu .ant-menu-item {
+  &:hover {
+    border-radius: 4px !important;
+  }
+}
+
+.custom-menu .ant-menu-item.ant-menu-item-selected {
+  background-color: var(--brand-color-800) !important;
+  color: var(--neutral-color-50) !important;
+  border-radius: 4px !important;
+}
+
+.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light {
+  border: none !important;
+}

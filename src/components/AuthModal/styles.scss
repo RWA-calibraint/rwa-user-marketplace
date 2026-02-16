@@ -1,0 +1,260 @@
+.ant-modal {
+  width: 450px !important;
+}
+
+.ant-modal-content {
+  padding: 0 !important;
+}
+
+.ant-form-item {
+  margin-bottom: 8px !important;
+}
+
+.ant-form-item-row {
+  flex-direction: row !important;
+}
+
+.form-input {
+  height: 44px !important;
+  border-radius: 2px !important;
+}
+
+.form-label {
+  height: auto !important;
+}
+
+.ant-form-item-required {
+  color: #09090b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ant-form-item-required::before {
+  content: none !important;
+}
+
+.auth-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.modal-header {
+  color: var(--text-secondary);
+  font-size: 18px;
+  font-weight: 500;
+  padding: 20px 28px;
+}
+
+.auth-modal,
+.password-modal {
+  padding: 28px;
+
+  h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%;
+    margin-bottom: 24px;
+    color: #71717a;
+  }
+
+  .forgot-password {
+    color: var(--brand-color-600);
+    cursor: pointer;
+    margin-top: 10px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .switch-auth {
+    margin-top: 16px;
+
+    span {
+      color: var(--brand-color-600);
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .login-switch {
+    margin-top: 10px;
+    font-size: 14px;
+
+    span {
+      color: var(--brand-color-600);
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.signup-modal {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 140%;
+    color: var(--text-primary);
+  }
+
+  p {
+    font-size: 16px;
+    color: var(--text-tertiary);
+  }
+
+  .social-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+
+    .social-btn {
+      max-width: 394px;
+      height: 48px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+
+  .or-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+      margin: 0 10px;
+    }
+  }
+
+  .name-fields {
+    display: flex;
+    gap: 16px;
+  }
+
+  .login-switch {
+    font-size: 14px;
+
+    span {
+      color: var(--brand-color-600);
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .terms {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: -12px;
+    color: var(--text-tertiary);
+
+    a {
+      color: var(--brand-color-600);
+      margin-left: 3px;
+      margin-right: 3px;
+    }
+  }
+}
+
+.verify-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-signin {
+  color: #1b7fae;
+  margin-left: auto;
+  font-size: 0.875rem;
+  font-weight: 600;
+
+  &:hover {
+    color: #175675 !important;
+    text-decoration: none !important;
+  }
+}
+
+.custom-close .ant-modal-close {
+  position: absolute;
+  top: 18px !important;
+  right: 20px !important;
+  color: var(--text-secondary) !important;
+
+  &:hover {
+    background-color: transparent !important;
+  }
+}
+
+.drawer {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  .ant-drawer-title {
+    font-size: 18px;
+    line-height: 100%;
+    font-weight: 500;
+    color: var(--text-tertiary);
+  }
+
+  .ant-drawer-close {
+    right: 16px;
+    top: 16px;
+    position: absolute;
+  }
+
+  .ant-drawer-body {
+    padding: 1rem;
+    overflow-y: auto;
+  }
+
+  .ant-drawer-content-wrapper {
+    max-width: none !important;
+  }
+}
+
+.auth-modal,
+.password-modal,
+.signup-modal {
+  @media (max-width: 430px) {
+    padding: 5px !important;
+
+    .social-login {
+      .social-btn {
+        max-width: 366px;
+      }
+    }
+  }
+}

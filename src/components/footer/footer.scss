@@ -1,0 +1,29 @@
+.footer-container {
+  @media (max-width: 430px) {
+    .footer-content-container {
+      flex-direction: column;
+      padding: 16px !important;
+      .fc-1 {
+        margin-bottom: 24px;
+      }
+      .fc-1,
+      .fc-2 {
+        flex-direction: column;
+        gap: 24px !important;
+        max-width: none !important;
+      }
+    }
+    .footer-bottom-container {
+      flex-direction: column;
+      height: auto !important;
+      padding: 16px !important;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column-reverse;
+    }
+
+    .mobile-footer-divider {
+      border-bottom: 1px solid var(--brand-color-900);
+    }
+  }
+}

@@ -1,0 +1,103 @@
+.custom-select {
+  width: 100%;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  min-width: fit-content;
+  height: 44px !important;
+
+  .ant-select-selector {
+    padding: 12px !important;
+    border-radius: 6px !important;
+    min-height: 38px !important;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--stroke-primary) !important;
+    box-shadow: none !important;
+
+    .ant-select-selection-wrap {
+      display: flex;
+      align-self: center !important;
+      gap: 1rem;
+    }
+
+    &:hover {
+      border-color: var(--stroke-primary) !important;
+    }
+  }
+
+  .ant-select-selection-placeholder {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text-secondary) !important;
+    line-height: unset;
+  }
+
+  .ant-select-selection-item {
+    font-weight: 500;
+    color: var(--neutral-color-700);
+    line-height: unset;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 6px;
+    border-radius: 4px !important;
+    margin: 2px 0 !important;
+
+    @media (min-width: 1024px) {
+      font-size: 0.875rem !important;
+    }
+
+    @media (min-width: 1440px) {
+      font-size: 1rem !important;
+    }
+
+    @media (min-width: 1920px) {
+      font-size: 1.125rem !important;
+    }
+  }
+
+  .ant-select-selection-item-content {
+    line-height: unset !important;
+  }
+
+  .ant-select-arrow {
+    color: #3f3f46;
+    height: 16px !important;
+    width: 16px !important;
+    transform: translateY(-50%);
+    margin-top: 0px !important;
+
+    .rotate {
+      transform: rotate(180deg);
+    }
+  }
+
+  .ant-select-clear {
+    display: none;
+  }
+
+  .ant-select-dropdown {
+    .ant-select-item {
+      margin: 4px 0 !important;
+    }
+  }
+}
+
+.approve-button {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid var(--brand-color-800);
+  background-color: var(--brand-color-800);
+  color: var(--neutral-color-50);
+  height: 44px;
+
+  &:disabled {
+    border: 1px solid var(--brand-color-300);
+    background-color: var(--brand-color-300);
+  }
+}

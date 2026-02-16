@@ -1,0 +1,35 @@
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint ==mobile {
+    @media (max-width: $mobile) {
+      @content;
+    }
+  } @else if $breakpoint ==tablet {
+    @media (max-width: $tablet) {
+      @content;
+    }
+  } @else if $breakpoint ==desktop {
+    @media (max-width: $desktop) {
+      @content;
+    }
+  }
+}
+// Mixin font properties here
+
+@mixin font($size, $lineHeight, $weight, $color) {
+  font-size: $size !important;
+  line-height: $lineHeight !important;
+  font-weight: $weight !important;
+  color: $color !important;
+}
+
+@mixin sizing($width, $height) {
+  width: $width !important;
+  height: $height !important;
+}

@@ -1,0 +1,12 @@
+.borderless-select {
+  width: 120px !important;
+  :global(.ant-select-selector) {
+    border: none !important;
+  }
+}
+
+.editable {
+  > span {
+    padding-top: 12px !important;
+  }
+}

@@ -1,0 +1,174 @@
+@use '../settings/mixins' as *;
+
+.ant-form {
+  scrollbar-width: none !important;
+  /* Hide scrollbar in Firefox */
+
+  ::-webkit-scrollbar {
+    display: none !important;
+    /* Hide scrollbar in Chrome, Safari, Edge */
+  }
+
+  .ant-form-item {
+    .ant-input-affix-wrapper {
+      .ant-input {
+        padding: 0 !important;
+      }
+    }
+
+    .ant-select-single {
+      height: 44px !important;
+    }
+
+    .ant-form-item-label > label {
+      @include font(14px, 14px, 500, var(--text-primary));
+    }
+
+    /* Select css */
+    .ant-select {
+      border-radius: 2px !important;
+      border: 1px solid var(--stroke-primary);
+
+      .ant-select-selector {
+        border: unset !important;
+        padding: 12px !important;
+
+        :hover {
+          border: unset !important;
+        }
+      }
+
+      .ant-select-selection-item {
+        @include font(14px, 20px, 400, var(--text-primary));
+      }
+
+      .ant-select-selection-placeholder {
+        @include font(14px, 20px, 400, var(--input-icon-default));
+      }
+
+      .ant-select-arrow {
+        @include sizing(16px, 16px);
+        color: var(--input-icon-default) !important;
+      }
+    }
+
+    .ant-select-status-error {
+      border-color: var(--default) !important;
+    }
+
+    /* Input css */
+    .ant-input {
+      height: 44px !important;
+      padding: 12px !important;
+      border-radius: 2px !important;
+
+      ::placeholder {
+        @include font(14px, 20px, 400, var(--input-icon-default));
+      }
+
+      @include font(14px, 20px, 400, var(--text-primary));
+    }
+
+    .ant-input-outlined:hover,
+    .ant-input-outlined:focus-within {
+      border-color: var(--stroke-primary) !important;
+      box-shadow: unset !important;
+    }
+
+    .ant-input-status-error:hover,
+    .ant-input-status-error:focus-within {
+      border-color: var(--default) !important;
+    }
+
+    /* Editor */
+    .editor {
+      .ant-select {
+        border: unset !important;
+      }
+    }
+
+    /* Input number */
+    .ant-input-number {
+      height: 44px !important;
+      width: 100% !important;
+
+      .ant-input-number-handler-wrap {
+        display: none !important;
+      }
+
+      .ant-input-number-input {
+        height: 100% !important;
+        padding: 12px !important;
+
+        ::placeholder {
+          @include font(14px, 20px, 400, var(--input-icon-default));
+        }
+
+        @include font(14px, 20px, 400, var(--text-primary));
+      }
+    }
+
+    .ant-input-number-outlined:hover {
+      border-color: var(--stroke-primary) !important;
+    }
+
+    /* Date picker*/
+    .ant-picker {
+      width: 100% !important;
+
+      .ant-picker-input {
+        > input::placeholder {
+          @include font(14px, 20px, 400, var(--input-icon-default));
+          text-align: left !important;
+        }
+      }
+    }
+
+    .ant-picker-outlined:hover {
+      border-color: var(--stroke-primary) !important;
+    }
+
+    .ant-picker-status-error,
+    .ant-picker-status-error:hover,
+    .ant-picker-status-error:focus-within {
+      border-color: var(--default) !important;
+    }
+
+    /* Upload */
+    .ant-upload-wrapper {
+      .draggable-image {
+        > div:last-child {
+          margin-right: 0 !important;
+        }
+      }
+
+      .ant-upload-list.ant-upload-list-picture,
+      .ant-upload-list-item.ant-upload-list-item-error {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        .ant-upload-list-item-container {
+          margin-right: 8px;
+        }
+      }
+
+      .ant-upload-wrapper {
+        .ant-upload {
+          padding: 0 !important;
+        }
+      }
+    }
+
+    .ant-form-item-required::before {
+      content: none !important;
+    }
+
+    .ant-form-item-explain-error {
+      @include font(14px, 20px, 400, var(--text-error));
+      margin-top: 8px !important;
+      margin-bottom: 8px !important;
+    }
+  }
+}

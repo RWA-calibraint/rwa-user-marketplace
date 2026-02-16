@@ -1,0 +1,24 @@
+.custom-popover {
+  .ant-popver {
+    position: absolute !important;
+    right: 50px !important;
+    top: 70px !important;
+  }
+}
+
+.notification-drawer-container .ant-drawer-body {
+  padding: 0px !important;
+}
+
+.header {
+  border-top-left-radius: 3px !important;
+  border-top-right-radius: 3px !important;
+}
+
+@media (max-width: 430px) {
+  .notification-drawer-container .ant-drawer-body .notification-content-container {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+}

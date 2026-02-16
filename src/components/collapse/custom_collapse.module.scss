@@ -1,0 +1,65 @@
+.custom-collapse {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  border: none;
+  .documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+
+  .document-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+    border: 1px solid var(--border);
+    padding: 10px;
+    border-radius: 6px;
+    width: fit-content;
+    max-width: 300px;
+
+    input[type='checkbox'] {
+      width: 16px;
+      height: 16px;
+    }
+
+    img {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+    }
+
+    span {
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .no-documents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 100%;
+    color: var(--file-secondary);
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: var(--brand-color-600);
+    }
+
+    p {
+      margin-top: 8px;
+      color: var(--neutral-color-500);
+    }
+  }
+}
+
+.active {
+  transform: rotate(180deg);
+}

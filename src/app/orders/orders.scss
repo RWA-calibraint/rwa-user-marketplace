@@ -1,0 +1,8 @@
+.table-ellipsis {
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}

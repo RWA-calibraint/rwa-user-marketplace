@@ -1,0 +1,51 @@
+.stepBadge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #1890ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stepContent {
+  margin-top: 10px;
+}
+
+.stepTitle {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.stepDescription {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .howItWorksCard {
+    padding: 25px;
+  }
+
+  .howItWorksTitle {
+    font-size: 24px;
+  }
+
+  .howItWorksSubtitle {
+    font-size: 14px;
+  }
+
+  .stepsGrid {
+    gap: 30px;
+  }
+
+  .visualizationImage {
+    margin: 20px 0;
+  }
+}
