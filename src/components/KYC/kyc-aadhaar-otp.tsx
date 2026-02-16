@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { message } from 'antd';
 import { CheckCircle } from 'lucide-react';
 import React, { useState } from 'react';
@@ -26,6 +27,7 @@ export default function AadhaarOtpForm({ onVerified }: AadhaarOtpFormProps) {
 
     if (!/^\d{12}$/.test(aadhaarNumber)) {
       setError('Please enter a valid 12-digit Aadhaar number');
+
       return;
     }
 
@@ -40,6 +42,7 @@ export default function AadhaarOtpForm({ onVerified }: AadhaarOtpFormProps) {
       message.success('OTP sent to your Aadhaar-linked mobile number');
     } catch (err: any) {
       const errMsg = err?.data?.message || err?.message || 'Failed to generate OTP';
+
       setError(errMsg);
     }
   };
@@ -49,6 +52,7 @@ export default function AadhaarOtpForm({ onVerified }: AadhaarOtpFormProps) {
 
     if (!otp || otp.length < 4) {
       setError('Please enter a valid OTP');
+
       return;
     }
 
@@ -66,6 +70,7 @@ export default function AadhaarOtpForm({ onVerified }: AadhaarOtpFormProps) {
       }
     } catch (err: any) {
       const errMsg = err?.data?.message || err?.message || 'Failed to verify OTP';
+
       setError(errMsg);
     }
   };
@@ -93,6 +98,7 @@ export default function AadhaarOtpForm({ onVerified }: AadhaarOtpFormProps) {
               value={aadhaarNumber}
               onChange={(e) => {
                 const val = e.target.value.replace(/\D/g, '').slice(0, 12);
+
                 setAadhaarNumber(val);
               }}
               maxLength={12}
@@ -125,6 +131,7 @@ export default function AadhaarOtpForm({ onVerified }: AadhaarOtpFormProps) {
               value={otp}
               onChange={(e) => {
                 const val = e.target.value.replace(/\D/g, '').slice(0, 6);
+
                 setOtp(val);
               }}
               maxLength={6}

@@ -26,7 +26,6 @@ const BuyModal: React.FC<BuyModalProps> = ({
       centered
       open={isOpen}
       onCancel={handleCancel}
-      onClose={handleCancel}
       footer={null}
       className={className}
       destroyOnClose

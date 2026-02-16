@@ -143,7 +143,6 @@ const AssetModal: React.FC<AssetModalProps> = ({
       centered
       open={isOpen}
       onCancel={handleCancelClick}
-      onClose={handleCancelClick}
       footer={null}
       className={className}
       destroyOnClose

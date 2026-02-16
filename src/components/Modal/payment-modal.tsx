@@ -21,7 +21,6 @@ const PaymentModal = ({
       centered
       open={isOpen}
       onCancel={handleCancel}
-      onClose={handleCancel}
       footer={null}
       destroyOnClose
       closable={false}

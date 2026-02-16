@@ -19,7 +19,7 @@ import { mobileSections } from '@helpers/constants/profile-drawer';
 
 import NotificationPopOver from '../drawer/notification-popover';
 
-import { VerificationsType } from './interface';
+// import { VerificationsType } from './interface';
 
 export const ProfileDropdown = ({
   onLogout,

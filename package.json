@@ -36,8 +36,8 @@
     "react-phone-input-2": "^2.15.1",
     "react-redux": "^9.2.0",
     "recharts": "^2.15.1",
-    "slate": "^0.112.0",
-    "slate-react": "^0.112.1",
+    "slate": "^0.123.0",
+    "slate-react": "^0.123.0",
     "swiper": "^11.2.6",
     "thirdweb": "^5.88.7"
   },

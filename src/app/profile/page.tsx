@@ -10,13 +10,9 @@ import { Suspense, useEffect, useState } from 'react';
 import { Menu } from '@/components/menu';
 import './styles.scss';
 import EmptyState from '@/components/profile/emptyState';
-import KYC from '@/components/profile/kyc';
 import { KYC_STATUS } from '@/helpers/constants/user-status';
 import { useUserListener } from '@/hooks/useUserListener';
-import {
-  useGetUserRewardsQuery,
-  useUpdateUserMutation,
-} from '@/redux/apis/user.api';
+import { useGetUserRewardsQuery, useUpdateUserMutation } from '@/redux/apis/user.api';
 import Address from '@components/profile/address';
 import { UserDetails } from '@components/profile/interface';
 import ProfileDetails from '@components/profile/profile';

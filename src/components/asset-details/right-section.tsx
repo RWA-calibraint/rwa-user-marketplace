@@ -157,6 +157,7 @@ const RightSection = ({
 
     showErrorToast(ERROR_MESSAGE.KYC_VERIFICATION, 'Complete KYC');
     setIsTxLoading(false);
+
     return false;
   };
 

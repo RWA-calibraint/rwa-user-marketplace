@@ -39,12 +39,14 @@ export default function KycModals() {
       if (userData?.kycVerificationStatus === 'completed') {
         setModalOpen(false);
         setOpenKycPopup(false);
+
         return;
       }
 
       // If status is 'review', show the review modal
       if (userData?.kycVerificationStatus === 'review') {
         setModalOpen(true);
+
         return;
       }
 

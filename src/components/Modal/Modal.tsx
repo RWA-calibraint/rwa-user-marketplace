@@ -33,7 +33,6 @@ const StyledModal: React.FC<ModalProps> = ({
       centered
       open={isOpen}
       onCancel={cancelHandler}
-      onClose={cancelHandler}
       footer={null}
       className={className}
       destroyOnClose

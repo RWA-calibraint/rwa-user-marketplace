@@ -10,5 +10,6 @@ export const isKycVerified = () => {
   }
 
   window.dispatchEvent(new Event('openKycPopup'));
+
   return false;
 };
