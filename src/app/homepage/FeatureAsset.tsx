@@ -103,6 +103,7 @@ function FeatureAsset() {
         }
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [featureAsset, accessTokenAdded]);
 
   const handleGetExclusiveAccess = async (assetId: string) => {

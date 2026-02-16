@@ -63,6 +63,7 @@ export default function Collections() {
   useEffect(() => {
     setFilterValues((prev) => ({ ...prev, searchValue: debouncedValue }));
     setPaginationInfo({ ...paginationInfo, currentPage: 1 });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
 
   const {

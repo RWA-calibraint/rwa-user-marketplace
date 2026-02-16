@@ -19,8 +19,6 @@ import { mobileSections } from '@helpers/constants/profile-drawer';
 
 import NotificationPopOver from '../drawer/notification-popover';
 
-// import { VerificationsType } from './interface';
-
 export const ProfileDropdown = ({
   onLogout,
   open,
@@ -42,6 +40,11 @@ export const ProfileDropdown = ({
   const [kycStatus, setKycStatus] = useState<string | undefined>('');
   const [getStripeLoginLink] = useLazyGetStripeLoginLinkQuery();
 
+  // REMOVED: Managed by useUserListener
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
+
   const handleLogout = () => {
     onLogout();
     setOpen(false);
@@ -62,7 +65,7 @@ export const ProfileDropdown = ({
     e.stopPropagation();
     setOpen(false);
     if (child.PATH === '/sell') {
-      if (!isKycVerified()) return;
+      if (!isKycVerified(user)) return;
       else {
         router.push(child.PATH);
       }
@@ -76,13 +79,7 @@ export const ProfileDropdown = ({
   };
 
   useEffect(() => {
-    if (user?.kycVerificationStatus === 'completed') {
-      setKycStatus(KYC_STATUS.VERIFIED);
-    } else if (user?.kycVerificationStatus === 'review') {
-      setKycStatus(KYC_STATUS.RESUBMIT);
-    } else {
-      setKycStatus(KYC_STATUS.PENDING);
-    }
+    setKycStatus(user?.kycVerificationStatus || KYC_STATUS.PENDING);
   }, [user]);
 
   const content = (
@@ -107,8 +104,8 @@ export const ProfileDropdown = ({
                 <p className="f-14-16-400-primary align-center">
                   {child.NAME}{' '}
                   {child.NAME === 'Profile' && kycStatus !== KYC_STATUS.VERIFIED ? (
-                    <span className="f-10-12-500-warning-secondary bg-warning p-x-8 p-y-4 m-l-2">
-                      {`${kycStatus ? `KYC ${kycStatus}` : ''} `}
+                    <span className="f-10-12-500-warning-secondary bg-warning text-uppercase p-x-8 p-y-4 m-l-2">
+                      {`KYC ${kycStatus === KYC_STATUS.RESUBMIT ? 'RESUBMIT' : kycStatus?.toUpperCase()}`}
                     </span>
                   ) : null}
                 </p>

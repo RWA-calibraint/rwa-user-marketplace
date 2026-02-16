@@ -8,8 +8,8 @@ import { AddressDataInterface } from '@/app/homepage/homepage.interface';
 
 import Button from '../button/button';
 
-import AadhaarOtpForm from './kyc-aadhaar-otp';
 import KycAddressForm from './kyc-address-form';
+import DiditKycForm from './kyc-didit';
 
 import './kyc-popup.scss';
 import 'react-phone-input-2/lib/style.css';
@@ -53,7 +53,7 @@ export default function KycPopup(kycProps: KycInterface) {
   const stepTitles: Record<number, string> = {
     1: 'Tell us about yourself',
     2: 'Tell us about your address',
-    3: 'Verify your Aadhaar',
+    3: 'Verify your Identity',
   };
 
   useEffect(() => {
@@ -76,7 +76,10 @@ export default function KycPopup(kycProps: KycInterface) {
       await form.validateFields();
 
       setCurrentStep(step + 1);
-    } catch (error) {}
+    } catch (_error) {
+      // eslint-disable-next-line no-console
+      console.log(_error);
+    }
   };
 
   const handleAddressSubmit = () => {
@@ -107,10 +110,10 @@ export default function KycPopup(kycProps: KycInterface) {
         <section className="p-28">
           <div>
             <div className="m-b-32">
-              <h5 className="f-13-14-400-secondary">Step {currentStep} of {TOTAL_STEPS}</h5>
-              <h2 className="f-17-18-600-secondary p-y-10">
-                {stepTitles[currentStep]}
-              </h2>
+              <h5 className="f-13-14-400-secondary">
+                Step {currentStep} of {TOTAL_STEPS}
+              </h5>
+              <h2 className="f-17-18-600-secondary p-y-10">{stepTitles[currentStep]}</h2>
               <h5 className="f-13-20-400-secondary">
                 {"We'll"} collect your personal details, address, and verification documents to ensure a secure and
                 seamless experience on RareAgora
@@ -214,7 +217,7 @@ export default function KycPopup(kycProps: KycInterface) {
 
             {/* step 3 */}
             <section className={currentStep === 3 ? 'd-block' : 'd-none'}>
-              <AadhaarOtpForm
+              <DiditKycForm
                 onVerified={() => {
                   if (onAadhaarVerified) onAadhaarVerified();
                   closePopup(false);
@@ -227,4 +230,3 @@ export default function KycPopup(kycProps: KycInterface) {
     </div>
   );
 }
-

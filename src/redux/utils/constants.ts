@@ -76,6 +76,8 @@ const END_POINTS = {
   getStripeLoginLink: (accountId: string) => `/users/stripe/login/${accountId}`,
   aadhaarGenerateOtp: '/api/user/aadhaar/generate-otp',
   aadhaarVerifyOtp: '/api/user/aadhaar/verify-otp',
+  diditCreateSession: '/api/user/didit/create-session',
+  diditGetDecision: (sessionId: string) => `/api/user/didit/decision/${sessionId}`,
 };
 
 const ERROR_MESSAGE = {

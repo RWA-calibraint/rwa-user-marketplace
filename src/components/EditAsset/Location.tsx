@@ -1,7 +1,7 @@
 'use client';
 import { useLoadScript } from '@react-google-maps/api';
 import { Form, FormInstance, Input, Skeleton } from 'antd';
-import { SetStateAction, useEffect, useRef, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 
 import { ENV_CONFIGS } from '@/helpers/constants/configs/env-vars';
 
@@ -16,68 +16,19 @@ const EditAssetLocation = ({
   address: string;
   setAddress: React.Dispatch<SetStateAction<string>>;
 }) => {
-  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const [expectedPostalCode, setExpectedPostalCode] = useState<string>('');
-  const [disabledFields, setDisabledFields] = useState({
+  const disabledFields = {
     city: false,
     state: false,
     country: false,
     postalCode: false,
-  });
+  };
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: ENV_CONFIGS.GOOGLE_API_KEY,
     libraries,
   });
 
-  const handlePlaceSelect = () => {
-    if (autocompleteRef.current) {
-      const place = autocompleteRef.current.getPlace();
-
-      if (!place || !place.address_components) return;
-
-      const addressData = {
-        address: place.formatted_address || '',
-        city: '',
-        state: '',
-        country: '',
-        postalCode: '',
-      };
-
-      const updatedDisabledFields = {
-        city: false,
-        state: false,
-        country: false,
-        postalCode: false,
-      };
-
-      place.address_components.forEach((component) => {
-        const types = component.types;
-
-        if (types.includes('locality')) {
-          addressData.city = component.long_name;
-          updatedDisabledFields.city = true;
-        }
-        if (types.includes('administrative_area_level_1')) {
-          addressData.state = component.long_name;
-          updatedDisabledFields.state = true;
-        }
-        if (types.includes('country')) {
-          addressData.country = component.long_name;
-          updatedDisabledFields.country = true;
-        }
-        if (types.includes('postal_code')) {
-          addressData.postalCode = component.long_name;
-          updatedDisabledFields.postalCode = true;
-          setExpectedPostalCode(component.long_name);
-        }
-      });
-
-      setAddress(addressData.address);
-      setDisabledFields(updatedDisabledFields);
-      form?.setFieldsValue(addressData);
-    }
-  };
   const watchedPostalCode = Form.useWatch('postalCode', form);
 
   useEffect(() => {

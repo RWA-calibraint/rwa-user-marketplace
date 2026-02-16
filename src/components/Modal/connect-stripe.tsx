@@ -4,7 +4,6 @@ import React from 'react';
 import { stripeData } from '@helpers/constants/constants';
 const ConnectStripeModal = ({
   isOpen = true,
-  handleCancel,
   handleConfirm,
   loading,
   isAccountOnboarded,

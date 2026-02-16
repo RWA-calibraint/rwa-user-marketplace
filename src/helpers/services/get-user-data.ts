@@ -6,6 +6,9 @@ export const getUserFromCookies = () => {
 
     return userCookie ? JSON.parse(userCookie) : null;
   } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('Error fetching user data from Cookies:', err);
+
     return null;
   }
 };

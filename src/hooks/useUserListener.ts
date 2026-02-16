@@ -1,41 +1,28 @@
 import Cookies from 'js-cookie';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { getUserFromCookies } from '@/helpers/services/get-user-data';
-import { useLazyGetUserDetailsQuery } from '@/redux/apis/user.api';
+import { useGetUserDetailsQuery } from '@/redux/apis/user.api';
+
+import { useCookieListener } from './useCookieListener';
 
 export const useUserListener = (refetch = false) => {
-  const [userData, setUserData] = useState(() => getUserFromCookies() || null);
-  const [getUserDetail] = useLazyGetUserDetailsQuery();
+  const isTokenAdded = useCookieListener();
+  const { data: userResponse } = useGetUserDetailsQuery(
+    {},
+    {
+      skip: !isTokenAdded,
+      refetchOnMountOrArgChange: refetch,
+    },
+  );
+
+  const userData = userResponse?.response;
 
   useEffect(() => {
-    const handleUserAdded = async () => {
-      let user = null;
+    if (userData) {
+      Cookies.set('user', JSON.stringify(userData));
+      window.dispatchEvent(new Event('userAdded'));
+    }
+  }, [userData]);
 
-      if (refetch) {
-        const userDetail = await getUserDetail({}).unwrap();
-
-        user = userDetail?.response;
-        Cookies.set('user', JSON.stringify(userDetail?.response ?? {}));
-      } else {
-        user = getUserFromCookies();
-      }
-
-      setUserData(user || null);
-    };
-
-    const handleUserDeleted = () => {
-      setUserData(null);
-    };
-
-    window.addEventListener('userAdded', handleUserAdded);
-    window.addEventListener('userDeleted', handleUserDeleted);
-
-    return () => {
-      window.removeEventListener('userAdded', handleUserAdded);
-      window.removeEventListener('userDeleted', handleUserDeleted);
-    };
-  }, [refetch]);
-
-  return userData;
+  return userData || null;
 };

@@ -30,7 +30,6 @@ export default function KycAddressForm({
   addressData,
   handleExternalVerification,
   setAddressData,
-  closePopup,
 }: AddressComponentProps) {
   const { showErrorToast } = useToast();
   const libraries: 'places'[] = ['places'];

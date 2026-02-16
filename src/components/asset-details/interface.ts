@@ -69,6 +69,7 @@ export interface ListingInterface {
   userAsset?: boolean;
   createdAt: string;
   deletedAt: string;
+  listingStatus?: string;
 }
 
 export interface OwnershipInterface {

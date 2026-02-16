@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import { Copy, LogOut, Wallet } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   ConnectButton,
   useActiveAccount,
@@ -40,9 +40,8 @@ const WalletConnectButton = () => {
   const { disconnect } = useDisconnect();
   const { connect } = useConnectModal();
   const [updateWalletAddress] = useUpdateWalletAddressMutation();
-  const [verifyCryptoAddress, { isLoading: isVerifying }] = useVerifyCryptoAddressMutation();
+  const [verifyCryptoAddress] = useVerifyCryptoAddressMutation();
   const [getUserDetail] = useLazyGetUserDetailsQuery();
-  const [loading, setLoading] = useState<boolean>(false);
 
   const shortenAddress = (address: string) => {
     if (!address) return '';
@@ -68,8 +67,6 @@ const WalletConnectButton = () => {
         const walletTransactionSuccess = await handleContractCall(account, showErrorToast, showSuccessToast);
 
         if (!walletTransactionSuccess) {
-          setLoading(false);
-
           return;
         }
       } catch (error: unknown) {
@@ -96,6 +93,7 @@ const WalletConnectButton = () => {
         window.dispatchEvent(new Event('userAdded'));
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, updateWalletAddress]);
 
   useEffect(() => {

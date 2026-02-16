@@ -15,10 +15,11 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useActiveAccount } from 'thirdweb/react';
 
 import { ENV_CONFIGS } from '@/helpers/constants/configs/env-vars';
+import { KYC_STATUS } from '@/helpers/constants/user-status';
 import { handleBuyWithCrypto, handleListCrypto } from '@/helpers/services/blockchain.service';
 import { getErrorMessage } from '@/helpers/services/get-error-message';
 import { getUserFromCookies } from '@/helpers/services/get-user-data';
@@ -108,7 +109,6 @@ const RightSection = ({
   const [availableTokens, setAvailableTokens] = useState<number>(assetData.availableTokens || 0);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const [paymentStatus, setPaymentStatus] = useState<PAYMENT_STATUS | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const [isTxLoading, setIsTxLoading] = useState<boolean>(false);
   const [paymentMethod, setPaymentMethod] = useState<string>('fiat');
   const [openMoonpayModal, setOpenMoonpayModal] = useState<boolean>(false);
@@ -151,11 +151,13 @@ const RightSection = ({
   };
 
   const checkIsKycVerified = () => {
-    if (userData?.kycVerificationStatus === 'completed') {
+    if (userData?.kycVerificationStatus === KYC_STATUS.VERIFIED) {
       return true;
     }
 
+    window.dispatchEvent(new Event('openKycPopup'));
     showErrorToast(ERROR_MESSAGE.KYC_VERIFICATION, 'Complete KYC');
+
     setIsTxLoading(false);
 
     return false;
@@ -172,7 +174,6 @@ const RightSection = ({
 
   const handleIncreaseTokens = () => {
     const availableTokens = assetData.tokens - assetData.soldTokens;
-    const maxAllowed = Math.floor(0.6 * assetData.tokens);
     const nextValue = tokens + 1;
 
     if (nextValue > availableTokens) {
@@ -224,6 +225,8 @@ const RightSection = ({
             });
             setOpenProcessingModel(false);
           } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(error);
             setOpenProcessingModel(false);
           }
         }
@@ -232,6 +235,7 @@ const RightSection = ({
     };
 
     checkMoonpayRedirects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   useEffect(() => {
@@ -324,6 +328,8 @@ const RightSection = ({
           showSuccessToast,
         });
       } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(e);
         if (assetRefetch) assetRefetch();
         setTokens(1);
         setPrice(0);
@@ -389,7 +395,8 @@ const RightSection = ({
 
   useEffect(() => {
     if (selectedListingId) {
-      const selectedListing = assetData.listings.find((listing) => listing._id === selectedListingId);
+      const activeListings = assetData?.listings?.filter((listing) => listing.listingStatus === 'active');
+      const selectedListing = activeListings.find((listing) => listing._id === selectedListingId);
 
       setPrice(selectedListing?.tokenPrice ?? 0);
       setAvailableTokens(selectedListing?.tokens ?? 0);
@@ -470,7 +477,11 @@ const RightSection = ({
               menuItems={menuItems}
               dropdownPlacement="bottom"
               handleClick={async (info: { key: string }) => {
-                if (!isKycVerified()) return;
+                if (!isKycVerified(userData)) {
+                  window.dispatchEvent(new Event('openKycPopup'));
+
+                  return;
+                }
 
                 if (info.key === 'fiat') {
                   if (!assetData?.sellerId?.stripeAccountId) {
@@ -503,7 +514,7 @@ const RightSection = ({
                 }
               }}
               className="width-85 bg-brand-blue p-x-16 p-y-8"
-              disabled={isBuyDisabled || loading}
+              disabled={isBuyDisabled}
             />
           </div>
           <div className="description asset-mobile-description-container d-none">

@@ -26,6 +26,7 @@ import { ActionType } from '@/components/Modal/interface';
 import StyledModal from '@/components/Modal/Modal';
 import { TableComponent } from '@/components/table/table';
 import { isKycVerified } from '@/helpers/services/kyc-verification';
+import { useUserListener } from '@/hooks/useUserListener';
 import { SearchBox } from '@app/component/search-box/search-box';
 import { AssetData } from '@components/asset-details/interface';
 import DropdownComponent from '@components/drop-down/drop-down';
@@ -57,6 +58,7 @@ import { PaginationComponent } from '../component/pagination/pagination';
 
 const Submission = () => {
   const router = useRouter();
+  const userData = useUserListener();
   const [status, setStatus] = useState<STATUS_TYPE>(STATUS_TYPE.SUBMITTED);
   const [activeTab, setActiveTab] = useState(STATUS_TYPE.SUBMITTED);
   const [tableParams, setTableParams] = useState({
@@ -664,8 +666,10 @@ const Submission = () => {
                       </div>
                       <Button
                         onClick={() => {
-                          if (isKycVerified()) {
+                          if (isKycVerified(userData)) {
                             router.push('/sell');
+                          } else {
+                            window.dispatchEvent(new Event('openKycPopup'));
                           }
                         }}
                         className="btn"

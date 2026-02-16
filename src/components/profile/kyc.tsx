@@ -87,6 +87,7 @@ const KYC: React.FC<KYCProps> = ({ applicantDetails, handleInitiateKyc }) => {
         window.dispatchEvent(new Event('userAdded'));
       })();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [verificationParams]);
 
   return (

@@ -1,16 +1,17 @@
 'use client';
 import { Drawer } from 'antd';
 import Cookies from 'js-cookie';
-import { ChevronDown, X as Close, Heart, Plus, Search, User } from 'lucide-react';
+import { Search, User, ChevronDown, X as Close, Heart, Plus } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useActiveWallet, useDisconnect } from 'thirdweb/react';
 
 import { showErrorToast } from '@/helpers/constants/toast.notification';
 import { isKycVerified } from '@/helpers/services/kyc-verification';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import { useUserListener } from '@/hooks/useUserListener';
 import { useFeatureAssetQuery, useGetLiveAssetsListQuery } from '@/redux/apis/asset.api';
 import { useLazyConfirmSocialSigninQuery, useLogoutMutation } from '@/redux/apis/auth.api';
 import { useLazyGetUserDetailsQuery } from '@/redux/apis/user.api';
@@ -53,16 +54,17 @@ export const Header = () => {
   const [openSearchDrawer, setOpenSearchDrawer] = useState<boolean>(false);
 
   const { showSuccessToast } = useToast();
-  const userData = user ? JSON.parse(user ?? '') : undefined;
+  const userData = useUserListener();
   const isMobileView = useMediaQuery('mobile');
-  const { data: featuredAssets, refetch: refetchFeaturedAssets } = useFeatureAssetQuery({});
-  const { data: liveAssets, refetch: refetchLiveAssets } = useGetLiveAssetsListQuery();
+  const { refetch: refetchFeaturedAssets } = useFeatureAssetQuery({});
+  const { refetch: refetchLiveAssets } = useGetLiveAssetsListQuery();
 
   useEffect(() => {
     if (isClient) {
       refetchFeaturedAssets();
       refetchLiveAssets();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClient, user, isTokenAdded]);
 
   useEffect(() => {
@@ -102,12 +104,14 @@ export const Header = () => {
             Cookies.set('user', JSON.stringify(userDetail?.response ?? {}));
             deleteSearchParams(['code']);
             setModalType(null);
+            window.dispatchEvent(new Event('userAdded'));
           }
         } catch (err) {
           showErrorToast(err);
         }
       })();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fullWidthPaths = ['/submission', '/orders', '/sold', '/cancelled-orders'];
@@ -203,8 +207,10 @@ export const Header = () => {
                   className="d-flex align-center gap-1 p-10 cursor-pointer radius-360 bg-white"
                   style={{ border: '1px solid #1B7FAE' }}
                   onClick={() => {
-                    if (isKycVerified()) {
+                    if (isKycVerified(userData)) {
                       router.push('/sell');
+                    } else {
+                      window.dispatchEvent(new Event('openKycPopup'));
                     }
                   }}
                 >
