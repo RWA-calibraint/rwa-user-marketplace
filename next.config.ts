@@ -8,11 +8,11 @@ const nextConfig: NextConfig = {
     RWA_TOKEN_CONTRACT_ADDRESS: process.env.RWA_TOKEN_CONTRACT_ADDRESS,
     MARKETPLACE_PROXY: process.env.RWA_TOKEN_CONTRACT_ADDRESS,
   },
-  webpack: (config) => {
-    config.externals.push('pino-pretty', 'lokijs', 'encoding');
+  // webpack: (config) => {
+  //   config.externals.push('pino-pretty', 'lokijs', 'encoding');
 
-    return config;
-  },
+  //   return config;
+  // },
   images: {
     remotePatterns: [
       {
@@ -32,11 +32,6 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    reactCompiler: true,
-    turbo: {
-      resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
-      //moduleIdStrategy: 'named',
-    },
     serverActions: {
       bodySizeLimit: '50mb',
     },
